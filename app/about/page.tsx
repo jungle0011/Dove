@@ -18,7 +18,7 @@ export default function AboutPage() {
 
   useEffect(() => {
     // Load theme preference
-    const savedTheme = localStorage.getItem("dove-theme")
+    const savedTheme = localStorage.getItem("graced-dove-theme")
     if (savedTheme) {
       setIsDarkMode(savedTheme === "dark")
     }
@@ -70,9 +70,9 @@ export default function AboutPage() {
           <div className="mb-20 scroll-reveal">
             <div className="bg-white/70 dark:bg-slate-800/70 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-gray-200 dark:border-slate-700 shadow-xl">
               <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
-                Dove is a sanctuary founded by Prophetess Blessing Ngozichukwu, offering a blend of spiritual insight,
+                The Graced Dove Prophetic Voice is a sanctuary founded by Prophetess Blessing Ngozichukwu, offering a blend of spiritual insight,
                 divine healing, and emotional wellness. Through prophetic sessions, healing perfumes, and personal
-                counseling, Dove aims to restore peace to souls worldwide under her anointed leadership.
+                counseling, The Graced Dove Prophetic Voice aims to restore peace to souls worldwide under her anointed leadership.
               </p>
             </div>
           </div>
@@ -87,7 +87,7 @@ export default function AboutPage() {
             <div className="bg-gradient-to-br from-amber-50 to-yellow-50 dark:from-slate-800 dark:to-slate-900 rounded-3xl p-8 md:p-12 border-2 border-amber-200 dark:border-amber-700">
               <p className="text-xl md:text-2xl text-center text-gray-800 dark:text-white font-light leading-relaxed">
                 To be a divine touchpoint for healing, hope, and spiritual clarity through the anointed ministry of
-                Prophetess Blessing Ngozichukwu.
+                Prophetess Blessing Ngozichukwu and The Graced Dove Prophetic Voice.
               </p>
             </div>
           </div>

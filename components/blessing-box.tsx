@@ -69,7 +69,7 @@ export default function BlessingBox() {
 
     // Create a dummy download
     const element = document.createElement("a")
-    element.href = "data:text/plain;charset=utf-8," + encodeURIComponent(`${title} - Downloaded from Dove Ministry`)
+    element.href = "data:text/plain;charset=utf-8," + encodeURIComponent(`${title} - Downloaded from The Graced Dove Prophetic Voice`)
     element.download = `${title.replace(/\s+/g, "_")}.txt`
     element.style.display = "none"
     document.body.appendChild(element)

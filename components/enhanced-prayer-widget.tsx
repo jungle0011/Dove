@@ -16,6 +16,7 @@ export default function EnhancedPrayerWidget() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [showCandle, setShowCandle] = useState(false)
   const [isAnonymous, setIsAnonymous] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     prayerRequest: "",
@@ -27,25 +28,33 @@ export default function EnhancedPrayerWidget() {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!isFormValid) return
+    if (!isFormValid || isSubmitting) return
 
-    const whatsappData = {
-      name: isAnonymous ? "Anonymous" : formData.name || "Anonymous",
-      type: "Prayer Request",
-      details: formData.prayerRequest,
+    setIsSubmitting(true)
+
+    try {
+      const whatsappData = {
+        name: isAnonymous ? "Anonymous" : formData.name || "Anonymous",
+        type: "Prayer Request",
+        details: formData.prayerRequest,
+      }
+
+      sendFormToWhatsApp(whatsappData)
+
+      setIsSubmitted(true)
+      setTimeout(() => {
+        setIsSubmitted(false)
+        setFormData({ name: "", prayerRequest: "" })
+        setIsAnonymous(false)
+        setIsSubmitting(false)
+      }, 4000)
+    } catch (error) {
+      setIsSubmitting(false)
+      // Handle error gracefully
     }
-
-    sendFormToWhatsApp(whatsappData)
-
-    setIsSubmitted(true)
-    setTimeout(() => {
-      setIsSubmitted(false)
-      setFormData({ name: "", prayerRequest: "" })
-      setIsAnonymous(false)
-    }, 4000)
   }
 
   const lightCandle = () => {
@@ -109,7 +118,11 @@ export default function EnhancedPrayerWidget() {
                   </div>
 
                   <div className="flex items-center space-x-2">
-                    <Checkbox id="anonymous" checked={isAnonymous} onCheckedChange={setIsAnonymous} />
+                    <Checkbox 
+                      id="anonymous" 
+                      checked={isAnonymous} 
+                      onCheckedChange={(checked) => setIsAnonymous(checked === true)} 
+                    />
                     <Label htmlFor="anonymous" className="text-sm">
                       Submit anonymously
                     </Label>
@@ -127,8 +140,12 @@ export default function EnhancedPrayerWidget() {
                     />
                   </div>
 
-                  <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600" disabled={!isFormValid}>
-                    Send to Prophetess Blessing
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-orange-500 hover:bg-orange-600" 
+                    disabled={!isFormValid || isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "Send to Prophetess Blessing"}
                   </Button>
                 </form>
               )}

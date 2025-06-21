@@ -9,58 +9,52 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo & Description */}
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="text-2xl">🕊️</div>
-              <span className="text-xl font-light">Dove</span>
+            <div className="flex items-center space-x-3 mb-6">
+              <div className="text-2xl animate-pulse">🕊️</div>
+              <div>
+                <span className="text-xl font-serif bg-gradient-to-r from-amber-600 to-yellow-600 bg-clip-text text-transparent">
+                  The Graced Dove
+                </span>
+                <p className="text-sm text-gray-500">Prophetic Voice</p>
+              </div>
             </div>
-            <p className="text-gray-400 mb-4 max-w-md">
-              A sacred space for healing, prophetic encounters, and spiritual transformation. Experience divine guidance
-              through prayer, counseling, and prophetic ministry.
+
+            <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-md">
+              A sanctuary for healing, prophecy, and divine guidance through The Graced Dove Prophetic Voice.
             </p>
-            <div className="text-sm text-gray-500">Upcoming: Spiritual Library - Devotionals & E-books</div>
+
+            <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+              <li>Phone: +234 702 691 8232</li>
+              <li>Email: info@thegraceddove.com</li>
+              <li>WhatsApp: Available 24/7</li>
+            </div>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-medium mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-gray-400">
-              <li>
-                <Link href="#home" className="hover:text-white transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="#sessions" className="hover:text-white transition-colors">
-                  Sessions
-                </Link>
-              </li>
-              <li>
-                <Link href="#testimonies" className="hover:text-white transition-colors">
-                  Testimonies
-                </Link>
-              </li>
-              <li>
-                <Link href="#booking" className="hover:text-white transition-colors">
-                  Booking
-                </Link>
-              </li>
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Quick Links</h3>
+            <ul className="space-y-2 text-sm">
+              <li><a href="/" className="text-gray-600 dark:text-gray-300 hover:text-amber-500 transition-colors">Home</a></li>
+              <li><a href="/about" className="text-gray-600 dark:text-gray-300 hover:text-amber-500 transition-colors">About</a></li>
+              <li><a href="/products" className="text-gray-600 dark:text-gray-300 hover:text-amber-500 transition-colors">Products</a></li>
+              <li><a href="/#sessions" className="text-gray-600 dark:text-gray-300 hover:text-amber-500 transition-colors">Sessions</a></li>
             </ul>
           </div>
 
-          {/* Contact */}
-          <div>
-            <h3 className="text-lg font-medium mb-4">Contact</h3>
-            <ul className="space-y-2 text-gray-400">
-              <li>Email: info@dove-ministry.com</li>
-              <li>Phone: +1 (555) 123-4567</li>
-              <li>WhatsApp: Available 24/7</li>
-              <li>Prayer Line: Always Open</li>
+          {/* Services */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Services</h3>
+            <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+              <li>• Prophetic Counseling</li>
+              <li>• Healing Sessions</li>
+              <li>• Spiritual Products</li>
+              <li>• Prayer Requests</li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-gray-400 text-sm mb-4 md:mb-0">© 2025 Dove Ministry. All rights reserved.</div>
+          <div className="text-gray-400 text-sm mb-4 md:mb-0">© 2025 The Graced Dove Prophetic Voice. All rights reserved.</div>
           <div className="text-gray-400 text-sm">
             Powered by{" "}
             <Link

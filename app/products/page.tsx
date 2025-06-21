@@ -62,7 +62,7 @@ export default function ProductsPage() {
 
   useEffect(() => {
     // Load theme preference
-    const savedTheme = localStorage.getItem("dove-theme")
+    const savedTheme = localStorage.getItem("graced-dove-theme")
     if (savedTheme) {
       setIsDarkMode(savedTheme === "dark")
     }
@@ -111,7 +111,7 @@ export default function ProductsPage() {
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-light mb-4">
             Sacred items blessed by Prophetess Blessing Ngozichukwu
           </p>
-          <p className="text-lg text-amber-600 dark:text-amber-400">Anointed for your spiritual journey</p>
+          <p className="text-lg text-amber-600 dark:text-amber-400">Anointed for your spiritual journey through The Graced Dove Prophetic Voice</p>
         </div>
       </section>
 

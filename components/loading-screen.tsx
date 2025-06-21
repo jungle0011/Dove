@@ -29,8 +29,7 @@ export default function LoadingScreen() {
           <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-blue-200 to-purple-200 opacity-30 animate-ping"></div>
         </div>
 
-        <h1 className="text-2xl font-light text-gray-700 mb-2 animate-fade-in">Welcome to Dove</h1>
-        <p className="text-gray-500 animate-fade-in-delay">A Space for Healing & Prophetic Encounters</p>
+        <h1 className="text-2xl font-light text-amber-600 mb-2 animate-fade-in">Welcome to The Graced Dove Prophetic Voice</h1>
 
         <div className="mt-8 flex justify-center">
           <div className="flex space-x-1">

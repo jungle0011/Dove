@@ -25,26 +25,22 @@ export default function HomePage() {
   const [isDarkMode, setIsDarkMode] = useState(false)
 
   useEffect(() => {
-    // Only show loading screen on first visit
-    const hasVisited = sessionStorage.getItem("dove-visited")
-    if (!hasVisited) {
-      setIsLoading(true)
-      sessionStorage.setItem("dove-visited", "true")
-      const timer = setTimeout(() => {
-        setIsLoading(false)
-      }, 3000)
-      return () => clearTimeout(timer)
-    }
+    // Show loading screen on every page load
+    setIsLoading(true)
+    const timer = setTimeout(() => {
+      setIsLoading(false)
+    }, 1500)
+    return () => clearTimeout(timer)
   }, [])
 
   useEffect(() => {
     // Save theme preference
-    localStorage.setItem("dove-theme", isDarkMode ? "dark" : "light")
+    localStorage.setItem("graced-dove-theme", isDarkMode ? "dark" : "light")
   }, [isDarkMode])
 
   useEffect(() => {
     // Load theme preference
-    const savedTheme = localStorage.getItem("dove-theme")
+    const savedTheme = localStorage.getItem("graced-dove-theme")
     if (savedTheme) {
       setIsDarkMode(savedTheme === "dark")
     }

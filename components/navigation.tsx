@@ -65,9 +65,9 @@ export default function Navigation({ isDarkMode, setIsDarkMode }: NavigationProp
               <span
                 className={`text-xl font-serif bg-gradient-to-r from-amber-600 to-yellow-600 bg-clip-text text-transparent`}
               >
-                Dove
+                The Graced Dove
               </span>
-              <p className={`text-xs ${isDarkMode ? "text-gray-400" : "text-gray-500"}`}>Guided by Grace</p>
+              <p className={`text-xs ${isDarkMode ? "text-gray-400" : "text-gray-500"}`}>Prophetic Voice</p>
             </div>
           </div>
 
