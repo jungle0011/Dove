@@ -8,7 +8,6 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
-    domains: ['placeholder.com', 'via.placeholder.com'],
   },
   compress: true,
   poweredByHeader: false,
@@ -28,10 +27,6 @@ const nextConfig = {
           {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin',
-          },
-          {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
           },
         ],
       },
