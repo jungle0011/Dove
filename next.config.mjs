@@ -10,9 +10,6 @@ const nextConfig = {
     unoptimized: true,
     domains: ['placeholder.com', 'via.placeholder.com'],
   },
-  experimental: {
-    optimizeCss: true,
-  },
   compress: true,
   poweredByHeader: false,
   async headers() {
