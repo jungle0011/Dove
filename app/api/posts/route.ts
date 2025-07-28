@@ -1,8 +1,14 @@
 import { NextResponse } from 'next/server';
 import { MongoClient } from 'mongodb';
 
-const uri = 'mongodb://localhost:27017';
+// Use environment variable for MongoDB URI
+const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017';
 const dbName = 'dove-spiritual-website';
+
+// Validate MongoDB URI
+if (!process.env.MONGODB_URI) {
+  console.warn('MONGODB_URI environment variable is not set. Using default local connection.');
+}
 
 // GET /api/posts - Get all posts
 export async function GET(request: Request) {
