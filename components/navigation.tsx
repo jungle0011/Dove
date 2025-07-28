@@ -17,6 +17,7 @@ export default function Navigation({ isDarkMode, setIsDarkMode }: NavigationProp
 
   const navItems = [
     { name: "Home", href: "/" },
+    { name: "Divine Inspirations", href: "/divine-inspirations" },
     { name: "About", href: "/about" },
     { name: "Products", href: "/products" },
     { name: "Sessions", href: "/#sessions" },
