@@ -19,6 +19,7 @@ import HealingRain from "@/components/healing-rain"
 import ScrollAnimations from "@/components/scroll-animations"
 import DoveParticles from "@/components/dove-particles"
 import FloatingPropheticWord from "@/components/floating-prophetic-word"
+import PostsCarouselWrapper from "@/components/posts-carousel-wrapper"
 
 export default function HomePage() {
   const [isLoading, setIsLoading] = useState(false)
@@ -98,6 +99,9 @@ export default function HomePage() {
 
       <main className="relative">
         <EnhancedHero />
+        <div className="scroll-reveal">
+          <PostsCarouselWrapper />
+        </div>
         <div className="scroll-reveal">
           <EnhancedServices />
         </div>
