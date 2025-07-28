@@ -1,19 +1,34 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useCallback, memo } from "react"
 import { Button } from "@/components/ui/button"
 import { Moon, Sun, Menu, X } from "lucide-react"
 import { useRouter, usePathname } from "next/navigation"
+import Link from "next/link"
+
+const NavItem = memo(({ item, isActive, onClick }: { item: { name: string, href: string }, isActive: boolean, onClick: () => void }) => (
+  <li>
+    <Button
+      variant="ghost"
+      className={`w-full justify-start text-lg ${isActive ? 'bg-accent' : ''}`}
+      onClick={onClick}
+    >
+      {item.name}
+    </Button>
+  </li>
+));
+
+NavItem.displayName = 'NavItem';
 
 interface NavigationProps {
   isDarkMode: boolean
-  setIsDarkMode: (value: boolean) => void
+  setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export default function Navigation({ isDarkMode, setIsDarkMode }: NavigationProps) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const router = useRouter()
-  const pathname = usePathname()
+const Navigation = ({ isDarkMode, setIsDarkMode }: NavigationProps) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -21,35 +36,33 @@ export default function Navigation({ isDarkMode, setIsDarkMode }: NavigationProp
     { name: "About", href: "/about" },
     { name: "Products", href: "/products" },
     { name: "Sessions", href: "/#sessions" },
-    { name: "Testimonies", href: "/#answered-prayers" },
-    { name: "Contact", href: "/#contact" },
-  ]
+    { name: "Testimonies", href: "/#answered-prayers" }
+  ];
 
-  const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode)
-  }
+  const toggleTheme = useCallback(() => {
+    setIsDarkMode((prev: boolean) => !prev);
+  }, [setIsDarkMode]);
 
-  const handleNavigation = (href: string) => {
+  const handleNavigation = useCallback((href: string) => {
+    setIsMenuOpen(false);
+    
     if (href.startsWith("/#")) {
-      // Internal scroll on homepage
       if (pathname === "/") {
-        const element = document.querySelector(href.substring(1))
+        const element = document.querySelector(href.substring(1));
         if (element) {
-          element.scrollIntoView({ behavior: "smooth", block: "start" })
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       } else {
-        // Navigate to homepage then scroll
-        router.push(href)
+        // Store the hash for the homepage to scroll to after navigation
+        sessionStorage.setItem('scrollTo', href.substring(1));
+        router.push(`/${href}`);
       }
     } else if (href === "/" && pathname === "/") {
-      // Scroll to top on same page
-      window.scrollTo({ top: 0, behavior: "smooth" })
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      // Page navigation
-      router.push(href)
+      router.push(href);
     }
-    setIsMenuOpen(false)
-  }
+  }, [pathname, router]);
 
   return (
     <nav
@@ -73,20 +86,16 @@ export default function Navigation({ isDarkMode, setIsDarkMode }: NavigationProp
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
+          <ul className="hidden md:flex items-center space-x-2">
             {navItems.map((item) => (
-              <button
+              <NavItem 
                 key={item.name}
+                item={item}
+                isActive={pathname === item.href.split("#")[0]}
                 onClick={() => handleNavigation(item.href)}
-                className={`relative transition-all duration-300 hover:text-amber-500 ${
-                  isDarkMode ? "text-gray-300" : "text-gray-600"
-                } group text-sm`}
-              >
-                {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-500 to-yellow-500 transition-all duration-300 group-hover:w-full"></span>
-              </button>
+              />
             ))}
-          </div>
+          </ul>
 
           {/* Theme Toggle */}
           <div className="flex items-center space-x-4">
@@ -152,5 +161,7 @@ export default function Navigation({ isDarkMode, setIsDarkMode }: NavigationProp
         }
       `}</style>
     </nav>
-  )
-}
+  );
+};
+
+export default Navigation;
