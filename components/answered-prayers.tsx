@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { ChevronLeft, ChevronRight, Star } from "lucide-react"
-import { answeredPrayers } from "@/src/data/testimonials"
+import { answeredPrayers } from "@/data/testimonials"
 
 // Custom hook for mobile detection with debounce
 const useMobileCheck = () => {
