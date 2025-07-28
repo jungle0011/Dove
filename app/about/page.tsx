@@ -42,7 +42,7 @@ export default function AboutPage() {
             <div className="prophetess-profile relative">
               <div className="absolute -inset-4 bg-gradient-to-r from-amber-200/30 via-yellow-200/30 to-amber-200/30 rounded-full blur-xl animate-pulse"></div>
               <img
-                src="/placeholder.png?height=250&width=250"
+                src="/blessing.jpg"
                 alt="Prophetess Blessing Ngozichukwu"
                 className="rounded-xl shadow-lg w-[250px] h-[250px] object-cover relative z-10"
               />
