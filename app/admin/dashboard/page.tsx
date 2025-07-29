@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { PostListItem } from '@/components/admin/PostListItem';
 
 export default function DashboardPage() {
   const [activeTab, setActiveTab] = useState('overview');
@@ -42,8 +43,6 @@ export default function DashboardPage() {
   };
 
   const deletePost = async (postId: string) => {
-    if (!confirm('Are you sure you want to delete this post?')) return;
-    
     try {
       const response = await fetch(`/api/posts/${postId}`, {
         method: 'DELETE',
@@ -52,11 +51,16 @@ export default function DashboardPage() {
       if (response.ok) {
         setPosts(posts.filter(post => post._id !== postId));
         setMessage('Post deleted successfully!');
+        return true;
       } else {
-        setMessage('Error deleting post');
+        const errorData = await response.json().catch(() => ({}));
+        setMessage(errorData.error || 'Error deleting post');
+        return false;
       }
     } catch (error) {
-      setMessage('Failed to delete post');
+      console.error('Delete error:', error);
+      setMessage('Failed to delete post. Please try again.');
+      return false;
     }
   };
 
@@ -81,6 +85,56 @@ export default function DashboardPage() {
       ...prev,
       [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
     }));
+  };
+
+  const handleTogglePublish = async (post: any) => {
+    try {
+      const response = await fetch(`/api/posts/${post._id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isPublished: !post.isPublished })
+      });
+
+      if (response.ok) {
+        setPosts(posts.map(p => 
+          p._id === post._id 
+            ? { ...p, isPublished: !post.isPublished }
+            : p
+        ));
+        setMessage(`Post ${!post.isPublished ? 'published' : 'unpublished'} successfully`);
+      } else {
+        const error = await response.json();
+        setMessage(`Error: ${error.error}`);
+      }
+    } catch (error) {
+      console.error('Toggle publish error:', error);
+      setMessage('Failed to update post status');
+    }
+  };
+
+  const handleTogglePin = async (post: any) => {
+    try {
+      const response = await fetch(`/api/posts/${post._id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isPinned: !post.isPinned })
+      });
+
+      if (response.ok) {
+        setPosts(posts.map(p => 
+          p._id === post._id 
+            ? { ...p, isPinned: !post.isPinned }
+            : p
+        ));
+        setMessage(`Post ${!post.isPinned ? 'pinned' : 'unpinned'} successfully`);
+      } else {
+        const error = await response.json();
+        setMessage(`Error: ${error.error}`);
+      }
+    } catch (error) {
+      console.error('Toggle pin error:', error);
+      setMessage('Failed to update pin status');
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -402,12 +456,14 @@ export default function DashboardPage() {
                         >
                           Edit
                         </button>
-                        <button
-                          onClick={() => deletePost(post._id)}
-                          className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition-colors text-sm"
-                        >
-                          Delete
-                        </button>
+                        <PostListItem 
+                          post={post} 
+                          onEdit={() => {}}
+                          onDelete={deletePost}
+                          onTogglePublish={handleTogglePublish}
+                          onTogglePin={handleTogglePin}
+                          onTagClick={() => {}}
+                        />
                       </div>
                     </div>
                   </div>
