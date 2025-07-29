@@ -1,8 +1,13 @@
 import { NextResponse } from 'next/server';
 import { MongoClient, ObjectId } from 'mongodb';
 
-const uri = 'mongodb://localhost:27017';
-const dbName = 'dove-spiritual-website';
+// Get MongoDB URI from environment variables
+const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017';
+const dbName = process.env.MONGODB_DB || 'dove-spiritual-website';
+
+if (!process.env.MONGODB_URI) {
+  console.warn('MONGODB_URI environment variable is not set. Using default local MongoDB connection.');
+}
 
 // PUT /api/posts/[id] - Update a post
 export async function PUT(

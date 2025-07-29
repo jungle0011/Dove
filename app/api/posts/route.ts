@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
 import { MongoClient } from 'mongodb';
 
-// Use environment variable for MongoDB URI
+// Use environment variables for MongoDB connection
 const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017';
-const dbName = 'dove-spiritual-website';
+const dbName = process.env.MONGODB_DB || 'dove-spiritual-website';
 
-// Validate MongoDB URI
+// Validate MongoDB configuration
 if (!process.env.MONGODB_URI) {
   console.warn('MONGODB_URI environment variable is not set. Using default local connection.');
 }
